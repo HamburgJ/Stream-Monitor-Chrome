@@ -140,25 +140,25 @@ function setIconToColor(color) {
     green: "#0CC078",
     yellow: "#FCFC99",
     grey: "#808080",
-    black: "#000000",
   };
 
   const canvas = new OffscreenCanvas(16, 16);
   const context = canvas.getContext("2d");
   context.clearRect(0, 0, 16, 16);
-  context.fillStyle = colorHex[color];
-  //make circle with radius of 8
-  context.beginPath();
-  context.arc(8, 8, 8, 0, 2 * Math.PI);
-  context.fill();
-  if (color === "black") {
+  if (color === "x") {
     context.strokeStyle = "#FB6962";
+    context.lineWidth = 3;
     context.beginPath();
     context.moveTo(0, 0);
     context.lineTo(16, 16);
     context.moveTo(16, 0);
     context.lineTo(0, 16);
     context.stroke();
+  } else {
+    context.fillStyle = colorHex[color];
+    context.beginPath();
+    context.arc(8, 8, 8, 0, 2 * Math.PI);
+    context.fill();
   }
   const imageData = context.getImageData(0, 0, 16, 16);
   chrome.action.setIcon({ imageData });
@@ -211,16 +211,16 @@ function onAlarm() {
           }
         }
       })
-      .catch(() => setIconToColor("black"));
+      .catch(() => setIconToColor("x"));
   }
 }
 
 chrome.runtime.onInstalled.addListener(() => {
-  setIconToColor("black");
+  setIconToColor("x");
   createAlarm();
 });
 chrome.runtime.onStartup.addListener(() => {
-  setIconToColor("black");
+  setIconToColor("x");
   createAlarm();
 });
 
