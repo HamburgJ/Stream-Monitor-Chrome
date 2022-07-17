@@ -1,0 +1,13 @@
+{
+  "name": "Game Watch",
+  "description": "Game Watch lets you always know if your favourite streamer is live or not, and if they're playing a game you like.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["alarms", "storage", "identity"],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
